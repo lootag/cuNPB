@@ -9,20 +9,19 @@
 
 using std::vector;
 
-__global__ void getKernel(const int *a, const int *b, int *c, int cols) {
+__global__ void getKernel(const int *a, const int *b, int *c, int cols) 
+{
   // Compute each thread's global row and column index
-  int row = blockIdx.y * blockDim.y + threadIdx.y;
-  int col = blockIdx.x * blockDim.x + threadIdx.x;
+    int row = blockIdx.y * blockDim.y + threadIdx.y;
+    int col = blockIdx.x * blockDim.x + threadIdx.x;
 
   // Iterate over row, and down column
-  if(row < cols && col < cols)
-  {
     c[col + row * cols] = 0;
     for (int k = 0; k < cols; k++) 
     {
         c[col + row * cols] += (a[k + row * cols] - b[col + k * cols]) * (a[k + row * cols] - b[col + k * cols]);
     }
-  }
+  
   
 }
 
