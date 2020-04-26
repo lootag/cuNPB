@@ -31,13 +31,12 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
 
 
 
-Eigen::MatrixXf GetKernel(Eigen::MatrixXf inputMatrix) 
+Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B) 
 {
   // Matrix size of 4 x 3;
-  int rows = inputMatrix.rows();
-  int cols = inputMatrix.cols();
+  int rows = A.rows();
+  int cols = A.cols();
   Eigen::MatrixXf C(rows,rows);
-  int tmp = 1;
   
 
   
@@ -52,19 +51,19 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf inputMatrix)
   vector<float> h_b(cols * rows);
   vector<float> h_c(rows * rows);
 
-  for(int row = 0; row != inputMatrix.rows(); row++)
+  for(int row = 0; row != A.rows(); row++)
   {
-      for(int col = 0; col != inputMatrix.cols(); col++)
+      for(int col = 0; col != A.cols(); col++)
       {
-          h_a[col + row*cols] = inputMatrix(row,col);
+          h_a[col + row*cols] = A(row,col);
       }
   }
 
-  for(int row = 0; row != inputMatrix.transpose().rows(); row++)
+  for(int row = 0; row != B.transpose().rows(); row++)
   {
-      for(int col = 0; col != inputMatrix.transpose().cols(); col++)
+      for(int col = 0; col != B.transpose().cols(); col++)
       {
-          h_b[col + row*inputMatrix.transpose().cols()] = inputMatrix.transpose()(row,col);
+          h_b[col + row * B.transpose().cols()] = B.transpose()(row,col);
       }
   }
 
