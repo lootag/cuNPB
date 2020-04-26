@@ -9,7 +9,7 @@
 
 using std::vector;
 
-__global__ void getKernel(const float *a, const float *b, float *c, int cols) 
+__global__ void getKernel(const float *a, const float *b, float *c, int rows, int cols) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
@@ -18,10 +18,10 @@ __global__ void getKernel(const float *a, const float *b, float *c, int cols)
   // Iterate over row, and down column
     if(row < cols && col < cols)
     {
-        c[col + row * cols] = 0;
+        c[col + row * rows] = 0;
         for (int k = 0; k < cols; k++) 
         {
-            c[col + row * cols] += (a[k + row * cols] - b[col + k * cols]) * (a[k + row * cols] - b[col + k * cols]);
+            c[col + row * rows] += (a[k + row * cols] - b[col + k * rows]) * (a[k + row * cols] - b[col + k * rows]);
         }
     }
   
@@ -101,7 +101,7 @@ int main() {
   dim3 blocks(BLOCKS, BLOCKS);
 
   // Launch kernel
-  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows);
+  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols);
 
   // Copy back to the host
   cudaMemcpy(h_c.data(), d_c, bytes_c, cudaMemcpyDeviceToHost);
