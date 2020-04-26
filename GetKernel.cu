@@ -75,7 +75,7 @@ int main() {
   {
       for(int col = 0; col != A.transpose().cols(); col++)
       {
-          h_b[col + row*cols] = A(row,col);
+          h_b[col + row*cols] = A.transpose()(row,col);
       }
   }
 
