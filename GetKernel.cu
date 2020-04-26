@@ -44,13 +44,13 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
 
   // Size (in bytes) of matrix
   size_t bytes_a = rows * cols * sizeof(float);
-  size_t bytes_b = cols * rows * sizeof(float);
-  size_t bytes_c = rows * rows * sizeof(float);
+  size_t bytes_b = cols * rowsB * sizeof(float);
+  size_t bytes_c = rows * rowsB * sizeof(float);
 
   // Host vectors
   vector<float> h_a(rows * cols);
   vector<float> h_b(cols * rowsB);
-  vector<float> h_c(rows * rows);
+  vector<float> h_c(rows * rowsB);
 
   for(int row = 0; row != A.rows(); row++)
   {
@@ -99,7 +99,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
   dim3 blocks(BLOCKS, BLOCKS);
 
   // Launch kernel
-  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols);
+  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, rowsB);
 
   // Copy back to the host
   cudaMemcpy(h_c.data(), d_c, bytes_c, cudaMemcpyDeviceToHost);
