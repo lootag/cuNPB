@@ -32,8 +32,8 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
 
 int main() {
   // Matrix size of 4 x 3;
-  int rows = 1024;
-  int cols = 512;
+  int rows = 33;
+  int cols = 41;
   Eigen::MatrixXf A(rows,cols);
   Eigen::MatrixXf C(rows,rows);
   int tmp = 1;
