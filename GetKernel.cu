@@ -43,6 +43,14 @@ int main() {
           tmp += 1;
       }
   }
+
+  for(int row = 0; row != A.rows(); row++)
+  {
+      for(int col = 0; col != A.cols(); col++)
+      {
+          std::cout << A(row, col) << std::endl;
+      }
+  }
   
 
   // Size (in bytes) of matrix
@@ -69,6 +77,11 @@ int main() {
       {
           h_b[col + row*cols] = A(row,col);
       }
+  }
+
+  for (int index = 0; index != h_b.size(); index++)
+  {
+      std::cout(h_b[index]); 
   }
 
 
