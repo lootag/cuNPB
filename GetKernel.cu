@@ -102,14 +102,14 @@ int main() {
   int THREADS = 32;
 
   // Blocks per grid dimension (assumes THREADS divides N evenly)
-  int BLOCKS = ceil(cols / THREADS);
+  int BLOCKS = ceil(rows / THREADS);
 
   // Use dim3 structs for block  and grid dimensions
   dim3 threads(THREADS, THREADS);
   dim3 blocks(BLOCKS, BLOCKS);
 
   // Launch kernel
-  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, cols);
+  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows);
 
   // Copy back to the host
   cudaMemcpy(h_c.data(), d_c, bytes_c, cudaMemcpyDeviceToHost);
