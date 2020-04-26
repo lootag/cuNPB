@@ -10,14 +10,14 @@
 
 using std::vector;
 
-__global__ void getKernel(const float *a, const float *b, float *c, int rows, int cols) 
+__global__ void getKernel(const float *a, const float *b, float *c, int rows, int cols, int rowsB) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
   // Iterate over row, and down column
-    if(row < rows && col < rows)
+    if(row < rows && col < rowsB)
     {
         c[col + row * rows] = 0;
         for (int k = 0; k < cols; k++) 
@@ -99,7 +99,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
   dim3 blocks(BLOCKS, BLOCKS);
 
   // Launch kernel
-  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, rowsB);
+  getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB);
 
   // Copy back to the host
   cudaMemcpy(h_c.data(), d_c, bytes_c, cudaMemcpyDeviceToHost);
