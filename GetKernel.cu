@@ -9,7 +9,7 @@
 
 using std::vector;
 
-__global__ void getKernel(const float *a, const float *b, int *c, int cols) 
+__global__ void getKernel(const float *a, const float *b, float *c, int cols) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
