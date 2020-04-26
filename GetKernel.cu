@@ -16,7 +16,7 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
   // Iterate over row, and down column
-    if(row < cols && col < cols)
+    if(row < rows && col < rows)
     {
         c[col + row * rows] = 0;
         for (int k = 0; k < cols; k++) 
