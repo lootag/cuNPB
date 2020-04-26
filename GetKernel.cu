@@ -94,7 +94,7 @@ int main() {
   int THREADS = 32;
 
   // Blocks per grid dimension (assumes THREADS divides N evenly)
-  int BLOCKS = 1;
+  int BLOCKS = rows/THREADS;
 
   // Use dim3 structs for block  and grid dimensions
   dim3 threads(THREADS, THREADS);
