@@ -126,6 +126,11 @@ int main() {
       }
   }
 
+  std::cout << dimensions << std::endl;
+  std::cout << C.rows() << std::endl;
+  std::cout << C.cols() << std::endl;
+
+
 
   // Free memory on device
   cudaFree(d_a);
