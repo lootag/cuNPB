@@ -9,7 +9,7 @@
 
 using std::vector;
 
-__global__ void getKernel(const int *a, const int *b, int *c, int cols) 
+__global__ void getKernel(const float *a, const float *b, int *c, int cols) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
@@ -53,9 +53,9 @@ int main() {
   
 
   // Size (in bytes) of matrix
-  size_t bytes_a = rows * cols * sizeof(int);
-  size_t bytes_b = cols * rows * sizeof(int);
-  size_t bytes_c = rows * rows * sizeof(int);
+  size_t bytes_a = rows * cols * sizeof(float);
+  size_t bytes_b = cols * rows * sizeof(float);
+  size_t bytes_c = rows * rows * sizeof(float);
 
   // Host vectors
   vector<float> h_a(rows * cols);
@@ -95,12 +95,10 @@ int main() {
   cudaMemcpy(d_b, h_b.data(), bytes_b, cudaMemcpyHostToDevice);
 
   // Threads per CTA dimension
-  int THREADS = 32;
+  int THREADS = 4;
 
   // Blocks per grid dimension (assumes THREADS divides N evenly)
   int BLOCKS = 1;
-  std::cout << "Blocks" << std::endl;
-  std::cout << BLOCKS << std::endl;
 
   // Use dim3 structs for block  and grid dimensions
   dim3 threads(THREADS, THREADS);
