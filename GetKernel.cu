@@ -56,7 +56,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf inputMatrix)
   {
       for(int col = 0; col != inputMatrix.cols(); col++)
       {
-          h_a[col + row*cols] = A(row,col);
+          h_a[col + row*cols] = inputMatrix(row,col);
       }
   }
 
