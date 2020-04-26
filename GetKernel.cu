@@ -30,21 +30,14 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
 
 
 
-int main() {
+Eigen::MatrixXf GetKernel(Eigen::MatrixXf inputMatrix) 
+{
   // Matrix size of 4 x 3;
-  int rows = 33;
-  int cols = 41;
-  Eigen::MatrixXf A(rows,cols);
+  int rows = inputMatrix.rows();
+  int cols = inputMatrix.cols();
   Eigen::MatrixXf C(rows,rows);
   int tmp = 1;
-  for(int row = 0; row != A.rows(); row++)
-  {
-      for(int col = 0; col != A.cols(); col++)
-      {
-          A(row, col) = tmp;
-          tmp += 1;
-      }
-  }
+  
 
   
 
@@ -58,19 +51,19 @@ int main() {
   vector<float> h_b(cols * rows);
   vector<float> h_c(rows * rows);
 
-  for(int row = 0; row != A.rows(); row++)
+  for(int row = 0; row != inputMatrix.rows(); row++)
   {
-      for(int col = 0; col != A.cols(); col++)
+      for(int col = 0; col != inputMatrix.cols(); col++)
       {
           h_a[col + row*cols] = A(row,col);
       }
   }
 
-  for(int row = 0; row != A.transpose().rows(); row++)
+  for(int row = 0; row != inputMatrix.transpose().rows(); row++)
   {
-      for(int col = 0; col != A.transpose().cols(); col++)
+      for(int col = 0; col != inputMatrix.transpose().cols(); col++)
       {
-          h_b[col + row*A.transpose().cols()] = A.transpose()(row,col);
+          h_b[col + row*inputMatrix.transpose().cols()] = inputMatrix.transpose()(row,col);
       }
   }
 
@@ -118,17 +111,6 @@ int main() {
       }
   }
 
-  for(int row = 0; row != C.rows(); row++)
-  {
-      for(int col = 0; col != C.cols(); col++)
-      {
-          std::cout << C(row,col) << std::endl;
-      }
-  }
-
-  std::cout << "dimensions" << std::endl;
-  std::cout << C.rows() << std::endl;
-  std::cout << C.cols() << std::endl;
 
 
 
@@ -137,5 +119,5 @@ int main() {
   cudaFree(d_b);
   cudaFree(d_c);
 
-  return 0;
+  return C;
 }
