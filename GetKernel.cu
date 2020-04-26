@@ -78,7 +78,7 @@ int main() {
   // Allocate device memory
   int *d_a, *d_b, *d_c;
   cudaMalloc(&d_a, bytes_a);
-  cudaMalloc(&d_a, bytes_b);
+  cudaMalloc(&d_b, bytes_b);
   cudaMalloc(&d_c, bytes_c);
 
   // Copy data to the device
@@ -105,7 +105,7 @@ int main() {
   {
       for(int col = 0; col != C.cols(); col++)
       {
-          C(row,col) = h_c[col + row*C.cols()]
+          C(row,col) = h_c[col + row*C.cols()];
       }
   }
 
