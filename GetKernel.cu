@@ -126,7 +126,7 @@ int main() {
       }
   }
 
-  std::cout << dimensions << std::endl;
+  std::cout << "dimensions" << std::endl;
   std::cout << C.rows() << std::endl;
   std::cout << C.cols() << std::endl;
 
