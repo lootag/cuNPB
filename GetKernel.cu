@@ -81,7 +81,7 @@ int main() {
 
   for (int index = 0; index != h_b.size(); index++)
   {
-      std::cout(h_b[index]); 
+      std::cout << h_b[index] << std::endl;
   }
 
 
