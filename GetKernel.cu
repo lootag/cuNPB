@@ -36,6 +36,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
   // Matrix size of 4 x 3;
   int rows = A.rows();
   int cols = A.cols();
+  int rowsB = B.rows();
   Eigen::MatrixXf C(rows,rows);
   
 
@@ -48,7 +49,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
 
   // Host vectors
   vector<float> h_a(rows * cols);
-  vector<float> h_b(cols * rows);
+  vector<float> h_b(cols * rowsB);
   vector<float> h_c(rows * rows);
 
   for(int row = 0; row != A.rows(); row++)
