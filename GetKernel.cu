@@ -16,10 +16,13 @@ __global__ void getKernel(const float *a, const float *b, float *c, int cols)
     int col = blockIdx.x * blockDim.x + threadIdx.x;
 
   // Iterate over row, and down column
-    c[col + row * cols] = 0;
-    for (int k = 0; k < cols; k++) 
+    if(row < cols && col < cols)
     {
-        c[col + row * cols] += (a[k + row * cols] - b[col + k * cols]) * (a[k + row * cols] - b[col + k * cols]);
+        c[col + row * cols] = 0;
+        for (int k = 0; k < cols; k++) 
+        {
+            c[col + row * cols] += (a[k + row * cols] - b[col + k * cols]) * (a[k + row * cols] - b[col + k * cols]);
+        }
     }
   
   
@@ -43,13 +46,6 @@ int main() {
       }
   }
 
-  for(int row = 0; row != C.rows(); row++)
-  {
-      for(int col = 0; col != C.cols(); col++)
-      {
-          std::cout << C(row,col) << std::endl;
-      }
-  }
   
 
   // Size (in bytes) of matrix
@@ -95,7 +91,7 @@ int main() {
   cudaMemcpy(d_b, h_b.data(), bytes_b, cudaMemcpyHostToDevice);
 
   // Threads per CTA dimension
-  int THREADS = 4;
+  int THREADS = 32;
 
   // Blocks per grid dimension (assumes THREADS divides N evenly)
   int BLOCKS = 1;
