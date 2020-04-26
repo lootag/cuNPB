@@ -85,7 +85,7 @@ int main() {
 
 
   // Allocate device memory
-  int *d_a, *d_b, *d_c;
+  float *d_a, *d_b, *d_c;
   cudaMalloc(&d_a, bytes_a);
   cudaMalloc(&d_b, bytes_b);
   cudaMalloc(&d_c, bytes_c);
