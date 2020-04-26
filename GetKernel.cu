@@ -19,10 +19,10 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
   // Iterate over row, and down column
     if(row < rows && col < rowsB)
     {
-        c[col + row * rows] = 0;
+        c[col + row * rowsB] = 0;
         for (int k = 0; k < cols; k++) 
         {
-            c[col + row * rows] += (a[k + row * cols] - b[col + k * rows]) * (a[k + row * cols] - b[col + k * rows]);
+            c[col + row * rowsB] += (a[k + row * cols] - b[col + k * rowsB]) * (a[k + row * cols] - b[col + k * rowsB]);
         }
     }
   
