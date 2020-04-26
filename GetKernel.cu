@@ -37,7 +37,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
   int rows = A.rows();
   int cols = A.cols();
   int rowsB = B.rows();
-  Eigen::MatrixXf C(rows,rows);
+  Eigen::MatrixXf C(rows,rowsB);
   
 
   
