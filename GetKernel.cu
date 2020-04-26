@@ -99,7 +99,7 @@ int main() {
   int THREADS = 32;
 
   // Blocks per grid dimension (assumes THREADS divides N evenly)
-  int BLOCKS = ceil(rows / THREADS);
+  int BLOCKS = 1;
   std::cout << "Blocks" << std::endl;
   std::cout << BLOCKS << std::endl;
 
