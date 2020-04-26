@@ -44,11 +44,11 @@ int main() {
       }
   }
 
-  for(int row = 0; row != A.rows(); row++)
+  for(int row = 0; row != C.rows(); row++)
   {
-      for(int col = 0; col != A.cols(); col++)
+      for(int col = 0; col != C.cols(); col++)
       {
-          std::cout << A(row, col) << std::endl;
+          std::cout << C(row,col) << std::endl;
       }
   }
   
@@ -79,10 +79,7 @@ int main() {
       }
   }
 
-  for (int index = 0; index != h_b.size(); index++)
-  {
-      std::cout << h_b[index] << std::endl;
-  }
+ 
 
 
   
@@ -103,6 +100,8 @@ int main() {
 
   // Blocks per grid dimension (assumes THREADS divides N evenly)
   int BLOCKS = ceil(rows / THREADS);
+  std::cout << "Blocks" << std::endl;
+  std::cout << BLOCKS << std::endl;
 
   // Use dim3 structs for block  and grid dimensions
   dim3 threads(THREADS, THREADS);
