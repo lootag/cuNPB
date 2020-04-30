@@ -25,7 +25,7 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
         {
             c[col + row * rowsB] += (a[k + row * cols] - b[col + k * rowsB]) * (a[k + row * cols] - b[col + k * rowsB]);
         }
-        //c[col + row + rowsB] = sigma_2*exp(-0.5*sqrt(c[col + row + rowsB])/l_2);
+        c[col + row * rowsB] = sigma_2*exp(-0.5*sqrt(c[col + row * rowsB])/l_2);
     }
   
   
