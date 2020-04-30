@@ -42,7 +42,7 @@ int main()
         }
     }
 
-    Eigen::MatrixXf Result = GetKernel(A, B);
+    Eigen::MatrixXf Result = GetKernel(A, B, 1, 1);
     for(int row = 0; row != Result.rows(); row++)
     {
         for(int col = 0; col != Result.cols(); col++)

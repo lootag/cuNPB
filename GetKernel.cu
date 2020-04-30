@@ -25,7 +25,7 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
         {
             c[col + row * rowsB] += (a[k + row * cols] - b[col + k * rowsB]) * (a[k + row * cols] - b[col + k * rowsB]);
         }
-        c[col + row + rowsB] = sigma_2*exp(-0.5*sqrt(c[col + row + rowsB])/l_2)s
+        c[col + row + rowsB] = sigma_2*exp(-0.5*sqrt(c[col + row + rowsB])/l_2);
     }
   
   
@@ -33,7 +33,7 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
 
 
 
-Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B) 
+Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B, float sigma_2, float l) 
 {   
     if(A.cols() != B.cols())
     {
@@ -105,7 +105,7 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B)
     dim3 blocks(BLOCKS, BLOCKS);
 
     // Launch kernel
-    getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB);
+    getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma_2, l);
 
     // Copy back to the host
     cudaMemcpy(h_c.data(), d_c, bytes_c, cudaMemcpyDeviceToHost);

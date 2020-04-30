@@ -5,5 +5,5 @@
 
 Eigen::MatrixXf from_csv(std::string path, int rows, int cols);
 Eigen::MatrixXf Multiply(Eigen::MatrixXf Left, Eigen::MatrixXf Right);
-Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B);
+Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B, float sigma_2, float l);
 #endif
