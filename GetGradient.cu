@@ -14,15 +14,15 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     Eigen::MatrixXf dK_dsigma = GetKernel(Train, Train, sigma, l, type_dK_dsigma);   
     Eigen::MatrixXf dK_dl = GetKernel(Train, Train, sigma, l, type_dK_dl);   
     Eigen::MatrixXf dsigma = 0.5*Multiply(labels.transpose(), Kernel.inverse().transpose());
-    Eigen::MatrixXf dsigma = Multiply(dsigma, dK_dsigma.transpose());
-    Eigen::MatrixXf dsigma = Multiply(dsigma, Kernel.inverse().transpose());
-    Eigen::MatrixXf dsigma = Multiply(dsigma, labels);
-    Eigen::MatrixXf dsigma = dsigma -0.5*Multiply(Kernel.inverse(), dK_dsigma.transpose()).trace();
+    dsigma = Multiply(dsigma, dK_dsigma.transpose());
+    dsigma = Multiply(dsigma, Kernel.inverse().transpose());
+    dsigma = Multiply(dsigma, labels);
+    dsigma = dsigma -0.5*Multiply(Kernel.inverse(), dK_dsigma.transpose()).trace();
     Eigen::MatrixXf dl = 0.5*Multiply(labels.transpose(), Kernel.inverse().transpose());
-    Eigen::MatrixXf dl = Multiply(dl, dK_dl.transpose());
-    Eigen::MatrixXf dl = Multiply(dl, Kernel.inverse().transpose());
-    Eigen::MatrixXf dl = Multiply(dl, labels);
-    Eigen::MatrixXf dl = dl -0.5*Multiply(Kernel.inverse(), dK_dl.transpose()).trace();
+    dl = Multiply(dl, dK_dl.transpose());
+    dl = Multiply(dl, Kernel.inverse().transpose());
+    dl = Multiply(dl, labels);
+    dl = dl -0.5*Multiply(Kernel.inverse(), dK_dl.transpose()).trace();
     gradient(0,0) = dsigma(0,0);
     gradient(0,1) = dl(0,0);
 }
