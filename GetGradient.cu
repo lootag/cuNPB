@@ -32,8 +32,8 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
         }
     }
     dsigma = Multiply(dsigma, dK_dsigma.transpose());
+    dsigma = Multiply(dsigma, K_inv.transpose());
     /*
-    dsigma = Multiply(dsigma, Kernel.inverse().transpose());
     dsigma = Multiply(dsigma, labels);
     Eigen::MatrixXf trace_dsigma(1,1);
     trace_dsigma(0,0) = 0.5*Multiply(Kernel.inverse(), dK_dsigma.transpose()).trace();
