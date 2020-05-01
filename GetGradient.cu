@@ -29,10 +29,10 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     dl = Multiply(dl, labels.transpose());
     Eigen::MatrixXf trace_dl(1,1);
     trace_dl(0,0) = 0.5*Multiply(K_inv, dK_dl.transpose()).trace();
-    /*
     dl = dl - trace_dl;
+    /*
     gradient(0,0) = dsigma(0,0); 
     gradient(0,1) = dl(0,0);
     */
-    return trace_dl;
+    return dl;
 }
