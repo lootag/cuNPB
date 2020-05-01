@@ -24,6 +24,7 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     dsigma = dsigma - trace_dsigma;
     */
     Eigen::MatrixXf dl = 0.5*Multiply(labels.transpose(), K_inv.transpose());
+    /*
     dl = Multiply(dl, dK_dl.transpose());
     dl = Multiply(dl, K_inv.transpose());
     dl = Multiply(dl, labels.transpose());
@@ -32,5 +33,6 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     dl = dl - trace_dl;
     gradient(0,0) = dsigma(0,0);
     gradient(0,1) = dl(0,0);
+    */
     return dl;
 }
