@@ -42,12 +42,33 @@ int main()
         }
     }
 
-    Eigen::MatrixXf Result = GetKernel(A, B, 1, 1);
+    Eigen::MatrixXf Result = GetKernel(A, A, 1, 1, standard);
+    std::cout << "Standard Case" << std::endl;
     for(int row = 0; row != Result.rows(); row++)
     {
         for(int col = 0; col != Result.cols(); col++)
         {
             std::cout << Result(row, col) << std::endl;
+        }
+    }
+
+    Eigen::MatrixXf dK_dsigma = GetKernel(Result, Result, 1, 1, dK_dsigma);
+    std::cout << "Derivative of K with respect to sigma" << std::endl;
+    for(int row = 0; row != dK_dsigma.rows(); row++)
+    {
+        for(int col = 0; col != dK_dsigma.cols(); col++)
+        {
+            std::cout << dK_dsigma(row, col) << std::endl;
+        }
+    }
+
+    Eigen::MatrixXf dK_dl2 = GetKernel(Result, Result, 1, 1, dK_dl2);
+    std::cout << "Derivative with respect to l2" << std::endl;
+    for(int row = 0; row != dK_dl2.rows(); row++)
+    {
+        for(int col = 0; col != dK_dl2.cols(); col++)
+        {
+            std::cout << dK_dl2(row, col) << std::endl;
         }
     }
 

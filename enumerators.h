@@ -1,0 +1,1 @@
+enum kernel_type {standard, dK_dsigma, dK_dl2};
