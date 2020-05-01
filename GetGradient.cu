@@ -18,7 +18,7 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     std::cout << "dsigma before multiplication" << std::endl;
     for(int row = 0; row != dsigma.rows(); row++)
     {
-        for(int col = 0; col != dsigma.cols(); cols ++)
+        for(int col = 0; col != dsigma.cols(); col ++)
         {
             std::cout << dsigma(row, col) << std::endl;
         }
@@ -26,7 +26,7 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     std::cout << "dK_dsigma" << std::endl;
     for(int row = 0; row != dK_dsigma.rows(); row++)
     {
-        for(int col = 0; col != dK_dsigma.cols(); cols ++)
+        for(int col = 0; col != dK_dsigma.cols(); col ++)
         {
             std::cout << dK_dsigma(row, col) << std::endl;
         }
