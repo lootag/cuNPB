@@ -32,5 +32,5 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     gradient(0,0) = dsigma(0,0);
     gradient(0,1) = dl(0,0);
     */
-    return dsigma;
+    return Kernel;
 }
