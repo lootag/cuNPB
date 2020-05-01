@@ -11,6 +11,7 @@
 
 using std::vector;
 
+//This is a cuda kernel that computes the rational quadratic kernel of two input matrices.
 __global__ void getKernel(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
 {
   // Compute each thread's global row and column index
@@ -32,6 +33,7 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
   
   
 }
+//This is a cuda kernel that computes the derivative wrt sigma of the rational quadratic kernel of two input matrices.
 __global__ void dK_dsigma(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
 {
   // Compute each thread's global row and column index
@@ -53,6 +55,7 @@ __global__ void dK_dsigma(const float *a, const float *b, float *c, int rows, in
   
 }
 
+//This is a cuda kernel that computes the derivative wrt l2 of the rational quadratic kernel of two input matrices.
 __global__ void dK_l2(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
 {
   // Compute each thread's global row and column index
@@ -78,7 +81,7 @@ __global__ void dK_l2(const float *a, const float *b, float *c, int rows, int co
 }
 
 
-
+//This function calls the kernels based on the value of the "type" enum, and returns an Eigen matrix. 
 Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B, float sigma, float l, kernel_type type) 
 {   
     if(A.cols() != B.cols())
