@@ -78,7 +78,7 @@ int main()
         }
     }
     */
-    Eigen::MatrixXf Gradient = GetGradient(A, B , 1, 1);
+    Eigen::MatrixXf Gradient = Multiply(B.transpose(), A.transpose());
     for(int row = 0; row != Gradient.rows(); row++)
     {
         for(int col = 0; col != Gradient.cols(); col++)
