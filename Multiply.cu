@@ -41,7 +41,7 @@ Eigen::MatrixXf Multiply(Eigen::MatrixXf Left, Eigen::MatrixXf Right)
     
     int m = A.size();
     int n = B.size(); 
-    int dim = A[1].size();
+    int dim = A[0].size();
     int gpu_id = 0;
 
     float* feature_m = new float[ m*dim ];

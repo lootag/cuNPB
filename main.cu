@@ -23,7 +23,7 @@ int main()
     }
     */
     Eigen::MatrixXf A(3,4);
-    Eigen::MatrixXf B(3,2);
+    Eigen::MatrixXf B(3,1);
     float tmp = 1;
     for(int row = 0; row != A.rows(); row++)
     {
