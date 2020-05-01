@@ -33,7 +33,7 @@ int main()
             tmp += 1;
         }
     }
-    tmp = 1;
+    tmp = 1000;
     for(int row = 0; row != B.rows(); row++)
     {
         for(int col = 0; col != B.cols(); col++)
