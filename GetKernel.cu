@@ -34,7 +34,7 @@ __global__ void getKernel(const float *a, const float *b, float *c, int rows, in
   
 }
 //This is a cuda kernel that computes the derivative wrt sigma of the rational quadratic kernel of two input matrices.
-__global__ void dK_dsigma(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
+__global__ void dsigma(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
@@ -56,14 +56,14 @@ __global__ void dK_dsigma(const float *a, const float *b, float *c, int rows, in
 }
 
 //This is a cuda kernel that computes the derivative wrt l2 of the rational quadratic kernel of two input matrices.
-__global__ void dK_l2(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
+__global__ void dl2(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     float l_2 = pow(l, 2);
     float l_4 = pow(l, 2);
-    float sigma_2 = pow(sigma, 2)
+    float sigma_2 = pow(sigma, 2);
 
 
   // Iterate over row, and down column
@@ -161,10 +161,10 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B, float sigma, flo
             getKernel<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
             break;
         case dK_dsigma:
-            dK_dsigma<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
+            dsigma<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
             break;
-        case dK_l2:
-            dK_l2<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
+        case dK_dl2:
+            dl2<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
             break;
     }
     // Copy back to the host
