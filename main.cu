@@ -23,7 +23,7 @@ int main()
     }
     */
     Eigen::MatrixXf A(3,4);
-    Eigen::MatrixXf B(6,4);
+    Eigen::MatrixXf B(3,1);
     float tmp = 1;
     for(int row = 0; row != A.rows(); row++)
     {
@@ -78,7 +78,7 @@ int main()
         }
     }
     */
-    Eigen::MatrixXf Gradient = GetGradient(A, A, 1, 1);
+    Eigen::MatrixXf Gradient = GetGradient(A, B , 1, 1);
     for(int row = 0; row != Gradient.rows(); row++)
     {
         for(int col = 0; col != Gradient.cols(); col++)
