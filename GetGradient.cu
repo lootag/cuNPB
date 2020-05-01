@@ -13,7 +13,8 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     Eigen::MatrixXf Kernel = GetKernel(Train, Train, sigma, l, type_standard);   
     Eigen::MatrixXf dK_dsigma = GetKernel(Train, Train, sigma, l, type_dK_dsigma);   
     Eigen::MatrixXf dK_dl = GetKernel(Train, Train, sigma, l, type_dK_dl);   
-    Eigen::MatrixXf dsigma = 0.5*Multiply(labels.transpose(), Kernel.inverse().transpose());
+    Eigen::MatrixXf dsigma = labels.transpose() * Kernel.inverse();
+    //Eigen::MatrixXf dsigma = 0.5*Multiply(labels.transpose(), Kernel.inverse().transpose());
     /*
     dsigma = Multiply(dsigma, dK_dsigma.transpose());
     dsigma = Multiply(dsigma, Kernel.inverse().transpose());
