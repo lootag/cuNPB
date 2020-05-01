@@ -42,7 +42,7 @@ int main()
             tmp += 1;
         }
     }
-
+    /*
     kernel_type type_standard = standard;
     Eigen::MatrixXf Result = GetKernel(A, A, 1, 1, type_standard);
     std::cout << "Standard Case" << std::endl;
@@ -66,7 +66,7 @@ int main()
         }
     }
 
-    kernel_type type_dK_dl2 = dK_dl2;
+    kernel_type type_dK_dl2 = dK_dl;
 
     Eigen::MatrixXf dK_dl2 = GetKernel(A, A, 1, 1, type_dK_dl2);
     std::cout << "Derivative with respect to l2" << std::endl;
@@ -75,6 +75,15 @@ int main()
         for(int col = 0; col != dK_dl2.cols(); col++)
         {
             std::cout << dK_dl2(row, col) << std::endl;
+        }
+    }
+    */
+    Eigen::MatrixXf Gradient = GetGradient(A, A, 1, 1);
+    for(int row = 0; row != Gradient.rows(); row++)
+    {
+        for(int col = 0; col != Gradient.cols(); col++)
+        {
+            std::cout << Gradient(row, col) << std::endl;
         }
     }
 

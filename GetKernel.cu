@@ -56,13 +56,13 @@ __global__ void dsigma(const float *a, const float *b, float *c, int rows, int c
 }
 
 //This is a cuda kernel that computes the derivative wrt l2 of the rational quadratic kernel of two input matrices.
-__global__ void dl2(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
+__global__ void dl(const float *a, const float *b, float *c, int rows, int cols, int rowsB, float sigma, float l) 
 {
   // Compute each thread's global row and column index
     int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     float l_2 = pow(l, 2);
-    float l_4 = pow(l, 2);
+    float l_3 = pow(l, 3);
     float sigma_2 = pow(sigma, 2);
 
 
@@ -74,7 +74,7 @@ __global__ void dl2(const float *a, const float *b, float *c, int rows, int cols
         {
             c[col + row * rowsB] += (a[k + row * cols] - b[col + k * rowsB]) * (a[k + row * cols] - b[col + k * rowsB]);
         }
-        c[col + row * rowsB] = 0.5*sigma_2*(sqrt(c[col + row * rowsB])/l_4)*exp(-0.5*sqrt(c[col + row * rowsB])/l_2);
+        c[col + row * rowsB] = sigma*(sqrt(c[col + row * rowsB])/l_2)*exp(-0.5*sqrt(c[col + row * rowsB])/l_2);
     }
   
   
@@ -163,8 +163,8 @@ Eigen::MatrixXf GetKernel(Eigen::MatrixXf A, Eigen::MatrixXf B, float sigma, flo
         case dK_dsigma:
             dsigma<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
             break;
-        case dK_dl2:
-            dl2<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
+        case dK_dl:
+            dl<<<blocks, threads>>>(d_a, d_b, d_c, rows, cols, rowsB, sigma, l);
             break;
     }
     // Copy back to the host
