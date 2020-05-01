@@ -17,12 +17,16 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     dsigma = Multiply(dsigma, dK_dsigma.transpose());
     dsigma = Multiply(dsigma, Kernel.inverse().transpose());
     dsigma = Multiply(dsigma, labels);
-    dsigma = dsigma -0.5*Multiply(Kernel.inverse(), dK_dsigma.transpose()).trace();
+    Eigen::MatrixXf trace_dsigma(1,1);
+    trace_dsigma(0,0) = 0.5*Multiply(Kernel.inverse(), dK_dsigma.transpose()).trace();
+    dsigma = dsigma - trace_dsigma;
     Eigen::MatrixXf dl = 0.5*Multiply(labels.transpose(), Kernel.inverse().transpose());
     dl = Multiply(dl, dK_dl.transpose());
     dl = Multiply(dl, Kernel.inverse().transpose());
     dl = Multiply(dl, labels);
-    dl = dl -0.5*Multiply(Kernel.inverse(), dK_dl.transpose()).trace();
+    Eigen::MatrixXf trace_dl(1,1);
+    trace_dl(0,0) = 0.5*Multiply(Kernel.inverse(), dK_dl.transpose()).trace();
+    dl = dl - trace_dl;
     gradient(0,0) = dsigma(0,0);
     gradient(0,1) = dl(0,0);
     return gradient;
