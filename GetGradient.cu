@@ -14,8 +14,7 @@ Eigen::MatrixXf GetGradient(Eigen::MatrixXf Train, Eigen::MatrixXf labels, float
     Eigen::MatrixXf dK_dsigma = GetKernel(Train, Train, sigma, l, type_dK_dsigma);   
     Eigen::MatrixXf dK_dl = GetKernel(Train, Train, sigma, l, type_dK_dl);   
     Eigen::MatrixXf K_inv = Kernel.inverse();
-    Eigen::MatrixXf dsigma = labels.transpose() * K_inv;
-    //Eigen::MatrixXf dsigma = 0.5*Multiply(labels.transpose(), K_inv.transpose());
+    Eigen::MatrixXf dsigma = 0.5*Multiply(labels.transpose(), K_inv.transpose());
     std::cout << "Kernel" << std::endl;
     for (int row = 0; row != Kernel.inverse().rows(); row++)
     {
