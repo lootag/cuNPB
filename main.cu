@@ -1,5 +1,6 @@
 #include <iostream>
 #include "preprocessing.h"
+#include "enumerators.h"
 #include <unistd.h>
 #include <eigen3/Eigen/Dense>
 
@@ -42,7 +43,8 @@ int main()
         }
     }
 
-    Eigen::MatrixXf Result = GetKernel(A, A, 1, 1, standard);
+    kernel_type type_standard = standard;
+    Eigen::MatrixXf Result = GetKernel(A, A, 1, 1, type_standard);
     std::cout << "Standard Case" << std::endl;
     for(int row = 0; row != Result.rows(); row++)
     {
@@ -51,8 +53,10 @@ int main()
             std::cout << Result(row, col) << std::endl;
         }
     }
+    
+    kernel_type type_dK_dsigma = dK_dsigma;
 
-    Eigen::MatrixXf dK_dsigma = GetKernel(Result, Result, 1, 1, dK_dsigma);
+    Eigen::MatrixXf dK_dsigma = GetKernel(Result, Result, 1, 1, type_dK_dsigma);
     std::cout << "Derivative of K with respect to sigma" << std::endl;
     for(int row = 0; row != dK_dsigma.rows(); row++)
     {
@@ -62,7 +66,9 @@ int main()
         }
     }
 
-    Eigen::MatrixXf dK_dl2 = GetKernel(Result, Result, 1, 1, dK_dl2);
+    kernel_type type_dK_dl2 = dK_dl2;
+
+    Eigen::MatrixXf dK_dl2 = GetKernel(Result, Result, 1, 1, type_dK_dl2);
     std::cout << "Derivative with respect to l2" << std::endl;
     for(int row = 0; row != dK_dl2.rows(); row++)
     {
