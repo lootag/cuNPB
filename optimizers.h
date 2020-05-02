@@ -4,5 +4,5 @@
 #include <vector>
 #include <eigen3/Eigen/Dense>
 
-std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train);
+std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train, Eigen::MatrixXf labels);
 #endif
