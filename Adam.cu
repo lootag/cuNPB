@@ -6,13 +6,12 @@
 #include "preprocessing.h"
 #include "optimizers.h"
 
-std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train, Eigen::MatrixXf labels)
+std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train, Eigen::MatrixXf labels, float tolerance, int maximum_iterations)
 {
     std::vector<float> params {0, 0};
     int n_param = 2;
     std::default_random_engine generator;
     std::normal_distribution<float> distribution(1,1);
-    float tolerance = 0.05;
     Eigen::MatrixXf m(n_param, 1);
     Eigen::MatrixXf v(n_param, 1);
     for(int row = 0; row != m.rows(); row++)
@@ -33,7 +32,6 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
     Eigen::MatrixXf v_hat = v;
     float l = distribution(generator);
     float sigma = distribution(generator);
-    int maximum_iterations = 1000;
     int iteration = 0;
     float epsilon = pow(10, -8);
     Eigen::MatrixXf gradient = GetGradient(Train, labels, sigma, l);
