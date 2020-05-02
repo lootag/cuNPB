@@ -3,7 +3,7 @@
 #include "model.h"
 #include "preprocessing.h"
 #include "enumerators.h"
-#include <eigen3/Eigen/dense>
+#include <eigen3/Eigen/Dense>
 
 void model::PredictMean()
 {
