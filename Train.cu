@@ -1,17 +1,23 @@
 #include <iostream>
 #include <string>
+#include <math.h>
 #include "model.h"
 #include "optimizers.h"
 #include <eigen3/Eigen/Dense>
 
-std::vector<float> model::Train()
+void model::Train()
 {
-    std::vector<float> parameters{0, 0};
-    model::set_sigma_2(3);
-    model::set_l_2(3);
-
-    parameters[0] = model::get_sigma_2();
-    parameters[1] = model::get_l_2();
-    return parameters;
+    
+    float alpha = model::get_alpha();
+    float beta1 = model::get_beta1();
+    float beta2 = model::get_beta2();
+    float tolerance = 0.008;
+    float max_iterations = 20000;
+    Eigen::MatrixXf X_Train = model::get_X_Train();
+    Eigen::MatrixXf Y_Train = model::get_Y_Train();
+    std::vector<float> parameters = Adam(alpha, beta1, beta2, X_Train, Y_Train, tolerance, max_iterations);
+    model::set_sigma_2(pow(parameters[0],2));
+    model::set_l_2(pow(parameters[1],2));
+    
     
 }

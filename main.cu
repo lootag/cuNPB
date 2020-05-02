@@ -3,6 +3,7 @@
 #include "enumerators.h"
 #include "optimizers.h"
 #include "model.h"
+#include <string>
 #include <unistd.h>
 #include <eigen3/Eigen/Dense>
 
@@ -102,11 +103,9 @@ int main()
     }
     */
     model Model(A, B);
-    std::vector<float> parameters = Model.Train();
-    for(int index = 0; index != parameters.size(); index++)
-    {
-        std::cout << parameters[index] << std::endl; 
-    }
+    Model.Train();
+    std::cout << "sigma is " + std::to_string(Model.get_sigma()) << std::endl;
+    std::cout << "l is " + std::to_string(Model.get_l_2()) << std::endl;
 
     return 0;
 }
