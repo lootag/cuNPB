@@ -1,6 +1,7 @@
 #include <iostream>
 #include "preprocessing.h"
 #include "enumerators.h"
+#include "optimizers.h"
 #include <unistd.h>
 #include <eigen3/Eigen/Dense>
 
@@ -78,6 +79,7 @@ int main()
         }
     }
     */
+    /*
     Eigen::MatrixXf Gradient = GetGradient(A, B , 1, 1);    
     for(int row = 0; row != Gradient.rows(); row++)
     {
@@ -85,6 +87,15 @@ int main()
         {
             std::cout << Gradient(row, col) << std::endl;
         }
+    }
+    */
+    float alpha = 0.001;
+    float beta1 = 0.9;
+    float beta2 = 0.999;
+    std::vector<float> parameters = Adam(alpha, beta1, beta2, A, B);
+    for(int index = 0; index != parameters.size(); index++)
+    {
+        std::cout << parameters[index] << std::endl; 
     }
 
 
