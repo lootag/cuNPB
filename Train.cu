@@ -16,8 +16,8 @@ void model::Train()
     Eigen::MatrixXf X_Train = model::get_X_Train();
     Eigen::MatrixXf Y_Train = model::get_Y_Train();
     std::vector<float> parameters = Adam(alpha, beta1, beta2, X_Train, Y_Train, tolerance, max_iterations);
-    model::set_sigma_2(parameters[0]);
-    model::set_l_2(parameters[1]);
+    model::set_sigma(parameters[0]);
+    model::set_l(parameters[1]);
     
     
 }
