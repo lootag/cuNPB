@@ -92,19 +92,20 @@ int main()
     }
     */
 
-    /*
+    
     float alpha = 0.001;
     float beta1 = 0.9;
     float beta2 = 0.999;
+    /*
     std::vector<float> parameters = Adam(alpha, beta1, beta2, A, B, 0.008, 10000);
     for(int index = 0; index != parameters.size(); index++)
     {
         std::cout << parameters[index] << std::endl; 
     }
     */
-    model Model(A, B);
+    model Model(A, B, alpha, beta1, beta2);
     Model.Train();
-    std::cout << "sigma is " + std::to_string(Model.get_sigma()) << std::endl;
+    std::cout << "sigma is " + std::to_string(Model.get_sigma_2()) << std::endl;
     std::cout << "l is " + std::to_string(Model.get_l_2()) << std::endl;
 
     return 0;
