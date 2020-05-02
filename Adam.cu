@@ -57,7 +57,7 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
         l = l  - alpha * m_hat(1,0) / (sqrt(v_hat(1,0) + epsilon));
         float sum_next = l + sigma;
         float percentage_change = std::abs(sum_next - sum_this)/sum_this;
-        std::cout << "Variation of " + std::to_string(percentage_change) + " %" << std::endl; 
+        std::cout << "Variation of " + std::to_string(percentage_change * 100) + " %" << std::endl; 
 
     }
     params[0] = sigma;
