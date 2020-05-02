@@ -6,13 +6,14 @@
 class model
 {
 private:
-    float sigma_2;
-    float l_2;
+    float sigma;
+    float l;
     float alpha;
     float beta1;
     float beta2;
     Eigen::MatrixXf X_Train;
     Eigen::MatrixXf Y_Train;
+    Eigen::MatrixXf X_Test;
     Eigen::MatrixXf mu;
     Eigen::MatrixXf Sigma_2;
     void set_mu(Eigen::MatrixXf _mu);
@@ -20,25 +21,29 @@ private:
     float get_alpha();
     float get_beta1();
     float get_beta2();
-    void set_sigma_2(float _sigma_2);
-    void set_l_2(float _l_2);
+    float get_sigma();
+    float get_l();
+    void set_sigma(float _sigma);
+    void set_l(float _l);
     Eigen::MatrixXf get_X_Train();
     Eigen::MatrixXf get_Y_Train();
+    Eigen::MatrixXf get_X_Test();
     
 public:
-    model(Eigen::MatrixXf X_Train, Eigen::MatrixXf Y_Train, float alpha, float _beta1, float _beta2);
+    model(Eigen::MatrixXf _X_Train, Eigen::MatrixXf _Y_Train, Eigen::MatrixXf _X_Test, float _alpha, float _beta1, float _beta2);
     ~model();
     Eigen::MatrixXf get_mu();
     Eigen::MatrixXf get_Sigma_2();
-    float get_sigma_2();
-    float get_l_2();
     void Train();
+    void PredictMean();
+    void PredictVariance(); 
 };
 
-inline model::model(Eigen::MatrixXf _X_Train, Eigen::MatrixXf _Y_Train, float _alpha, float _beta1, float _beta2)
+inline model::model(Eigen::MatrixXf _X_Train, Eigen::MatrixXf _Y_Train, Eigen::MatrixXf _X_Test, float _alpha, float _beta1, float _beta2)
 {
     X_Train = _X_Train;
     Y_Train = _Y_Train;
+    X_Test = _X_Test;
     alpha = _alpha;
     beta1 = _beta1;
     beta2 = _beta2; 
@@ -64,24 +69,24 @@ inline void model::set_Sigma_2(Eigen::MatrixXf _Sigma_2)
     Sigma_2 = _Sigma_2;
 }
 
-inline float model::get_sigma_2()
+inline float model::get_sigma()
 {
-    return sigma_2;
+    return sigma;
 }
 
-inline float model::get_l_2()
+inline float model::get_l()
 {
-    return l_2;
+    return l;
 }
 
-inline void model::set_sigma_2(float _sigma_2)
+inline void model::set_sigma(float _sigma)
 {
-    sigma_2 = _sigma_2;
+    sigma = _sigma;
 }
 
-inline void model::set_l_2(float _l_2)
+inline void model::set_l(float _l)
 {
-    l_2 = _l_2;
+    l = _l;
 }
 
 inline float model::get_alpha()
@@ -107,6 +112,11 @@ inline Eigen::MatrixXf model::get_X_Train()
 inline Eigen::MatrixXf model::get_Y_Train()
 {
     return Y_Train;
+}
+
+inline Eigen::MatrixXf model::get_X_Test()
+{
+    return X_Test;
 }
 
 inline model::~model()
