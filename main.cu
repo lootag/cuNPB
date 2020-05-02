@@ -101,7 +101,7 @@ int main()
         std::cout << parameters[index] << std::endl; 
     }
     */
-    model Model;
+    model Model(A, B);
     std::vector<float> parameters = Model.Train();
     for(int index = 0; index != parameters.size(); index++)
     {
