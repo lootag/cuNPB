@@ -1,10 +1,11 @@
 #include <iostream>
+#include <random>
 #include <math.h>
 #include <eigen3/Eigen/Dense>
 #include "preprocessing.h"
 #include "optimizers.h"
 
-std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train)
+std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train, Eigen::MatrixXf labels)
 {
     std::vector<float> params {0, 0};
     int n_param = 2;
