@@ -6,7 +6,7 @@
 #include "preprocessing.h"
 #include "optimizers.h"
 
-std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf Train, Eigen::MatrixXf labels, float tolerance, int maximum_iterations)
+std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf X_Train, Eigen::MatrixXf Y_Train, float tolerance, int maximum_iterations)
 {
     std::vector<float> params {0, 0};
     int n_param = 2;
@@ -34,14 +34,14 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
     float sigma = distribution(generator);
     int iteration = 0;
     float epsilon = pow(10, -8);
-    Eigen::MatrixXf gradient = GetGradient(Train, labels, sigma, l);
+    Eigen::MatrixXf gradient = GetGradient(X_Train, Y_train, sigma, l);
     Eigen::MatrixXf gradient_2(2,1);
     float percentage_change = 1000;
     while((!(percentage_change <= tolerance) && !(iteration >= maximum_iterations)) || iteration <= 1000)
     {
         iteration += 1;
         std::cout << "iteration number " + std::to_string(iteration) << std::endl;
-        gradient = GetGradient(Train, labels, sigma, l);
+        gradient = GetGradient(X_Train, Y_Train, sigma, l);
         for(int row = 0; row != gradient_2.rows(); row++)
         {
             for(int col = 0; col != gradient_2.cols(); col++)

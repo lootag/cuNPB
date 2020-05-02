@@ -2,6 +2,7 @@
 #include "preprocessing.h"
 #include "enumerators.h"
 #include "optimizers.h"
+#include "model.h"
 #include <unistd.h>
 #include <eigen3/Eigen/Dense>
 
@@ -89,6 +90,8 @@ int main()
         }
     }
     */
+
+    /*
     float alpha = 0.001;
     float beta1 = 0.9;
     float beta2 = 0.999;
@@ -97,7 +100,13 @@ int main()
     {
         std::cout << parameters[index] << std::endl; 
     }
-
+    */
+    model Model;
+    std::vector<float> Model.Train();
+    for(int index = 0; index != parameters.size(); index++)
+    {
+        std::cout << parameters[index] << std::endl; 
+    }
 
     return 0;
 }
