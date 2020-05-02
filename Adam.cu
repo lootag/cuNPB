@@ -32,10 +32,10 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
     Eigen::MatrixXf v_hat = v;
     float l = distribution(generator);
     float sigma = distribution(generator);
-    int maximum iterations = 1000;
+    int maximum_iterations = 1000;
     int iteration = 0;
     float epsilon = pow(10, -8);
-    Eigen::MatrixXf gradient = GetGradient(Train, sigma, l);
+    Eigen::MatrixXf gradient = GetGradient(Train, labels, sigma, l);
     Eigen::MatrixXf gradient_2(2,1);
     bool converged = gradient[0] == tolerance && gradient[1] == tolerance;
     bool out_of_bounds = iteration > maximum_iterations;
