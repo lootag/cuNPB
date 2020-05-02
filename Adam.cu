@@ -36,7 +36,8 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
     float epsilon = pow(10, -8);
     Eigen::MatrixXf gradient = GetGradient(Train, labels, sigma, l);
     Eigen::MatrixXf gradient_2(2,1);
-    while(!(std::abs(gradient(0,0)) + std::abs(gradient(1,0)) <= tolerance) && !(iteration >= maximum_iterations))
+    float percentage_change = 1000;
+    while(!(std::abs(percentage_change <= tolerance) && !(iteration >= maximum_iterations))
     {
         iteration += 1;
         std::cout << "iteration number " + std::to_string(iteration) << std::endl;
@@ -56,8 +57,8 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
         sigma = sigma  - alpha * m_hat(0,0) / (sqrt(v_hat(0,0) + epsilon));
         l = l  - alpha * m_hat(1,0) / (sqrt(v_hat(1,0) + epsilon));
         float sum_next = l + sigma;
-        float percentage_change = std::abs(sum_next - sum_this)/sum_this;
-        std::cout << "Variation of " + std::to_string(percentage_change * 100) + " %" << std::endl; 
+        float percentage_change = std::abs(sum_next - sum_this)/sum_this * 100;
+        std::cout << "Variation of " + std::to_string(percentage_change) + " %" << std::endl; 
 
     }
     params[0] = sigma;
