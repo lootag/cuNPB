@@ -37,9 +37,7 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
     float epsilon = pow(10, -8);
     Eigen::MatrixXf gradient = GetGradient(Train, labels, sigma, l);
     Eigen::MatrixXf gradient_2(2,1);
-    bool converged = std::abs(gradient(0,0)) <= tolerance && std::abs(gradient(1,0)) <= tolerance;
-    bool out_of_bounds = iteration > maximum_iterations;
-    while(!converged && !out_of_bounds)
+    while(!(std::abs(gradient(0,0)) <= tolerance && std::abs(gradient(1,0)) <= tolerance) && !(iteration > maximum_iterations))
     {
         iteration += 1;
         gradient = GetGradient(Train, labels, sigma, l);
