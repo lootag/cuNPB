@@ -92,7 +92,7 @@ int main()
     float alpha = 0.001;
     float beta1 = 0.9;
     float beta2 = 0.999;
-    std::vector<float> parameters = Adam(alpha, beta1, beta2, A, B, 0.001, 10000);
+    std::vector<float> parameters = Adam(alpha, beta1, beta2, A, B, 0.002, 100000);
     for(int index = 0; index != parameters.size(); index++)
     {
         std::cout << parameters[index] << std::endl; 
