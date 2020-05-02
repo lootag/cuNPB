@@ -103,10 +103,16 @@ int main()
         std::cout << parameters[index] << std::endl; 
     }
     */
-    model Model(A, B, alpha, beta1, beta2);
+    model Model(A, B, A, alpha, beta1, beta2);
     Model.Train();
-    std::cout << "sigma is " + std::to_string(Model.get_sigma_2()) << std::endl;
-    std::cout << "l is " + std::to_string(Model.get_l_2()) << std::endl;
+    Model.PredictMean(); 
+    for(int row = 0; row != Model.get_mu().rows(); row ++)
+    {
+        for(int col = 0; col != Model.get_mu().cols(); col++)
+        {
+            std::cout << std::to_string(Model.get_mu()(row, col)) << std::endl; 
+        }
+    }
 
     return 0;
 }
