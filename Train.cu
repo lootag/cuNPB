@@ -6,8 +6,12 @@
 
 std::vector<float> model::Train()
 {
+    std::vector<float> parameters{0, 0};
     model::set_sigma_2(3);
     model::set_l_2(3);
 
-    std::cout << std::to_string(model::get_sigma_2() + model::get_l_2()) << std::endl;
+    parameters[1] = model::get_sigma_2();
+    parameters[2] = model::get_l_2();
+    return parameters;
+    
 }
