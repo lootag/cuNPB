@@ -34,7 +34,7 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf X
     float sigma = distribution(generator);
     int iteration = 0;
     float epsilon = pow(10, -8);
-    Eigen::MatrixXf gradient = GetGradient(X_Train, Y_train, sigma, l);
+    Eigen::MatrixXf gradient = GetGradient(X_Train, Y_Train, sigma, l);
     Eigen::MatrixXf gradient_2(2,1);
     float percentage_change = 1000;
     while((!(percentage_change <= tolerance) && !(iteration >= maximum_iterations)) || iteration <= 1000)
