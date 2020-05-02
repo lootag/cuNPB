@@ -10,8 +10,8 @@ std::vector<float> model::Train()
     model::set_sigma_2(3);
     model::set_l_2(3);
 
-    parameters[1] = model::get_sigma_2();
-    parameters[2] = model::get_l_2();
+    parameters[0] = model::get_sigma_2();
+    parameters[1] = model::get_l_2();
     return parameters;
     
 }
