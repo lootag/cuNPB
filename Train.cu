@@ -9,5 +9,5 @@ std::vector<float> model::Train()
     model::set_sigma_2(3);
     model::set_l_2(3);
 
-    std::cout << to_string(model::get_sigma_2() + model::get_l2()) << std::endl;
+    std::cout << std::to_string(model::get_sigma_2() + model::get_l_2()) << std::endl;
 }
