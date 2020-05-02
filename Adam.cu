@@ -37,7 +37,7 @@ std::vector<float> Adam(float alpha, float beta1, float beta2, Eigen::MatrixXf T
     Eigen::MatrixXf gradient = GetGradient(Train, labels, sigma, l);
     Eigen::MatrixXf gradient_2(2,1);
     float percentage_change = 1000;
-    while(!(std::abs(percentage_change <= tolerance) && !(iteration >= maximum_iterations))
+    while(!(std::abs(percentage_change) <= tolerance) && !(iteration >= maximum_iterations))
     {
         iteration += 1;
         std::cout << "iteration number " + std::to_string(iteration) << std::endl;
