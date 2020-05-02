@@ -15,7 +15,9 @@ void model::PredictMean()
     float l = model::get_l();
     Eigen::MatrixXf K_Test_Train = GetKernel(X_Test, X_Train, sigma, l, type_standard);
     Eigen::MatrixXf K_Train_Train = GetKernel(X_Train, X_Train, sigma, l, type_standard);
-    Eigen::MatrixXf MiddleTerm = K_Train_Train + (pow(sigma, 2) * Eigen::MatrixXf::Identity(K_Train_Train.rows(), K_Train_Train.col())); 
+    Eigen::MatrixXf I;
+    I.setIdentity(K_Train_Train.rows(), K_Train_Train.cols());
+    Eigen::MatrixXf MiddleTerm = K_Train_Train + (pow(sigma, 2) * I); 
     Eigen::MatrixXf MiddleTerm_inv = MiddleTerm.inverse();
     Eigen::MatrixXf mu = Multiply(K_Test_Train, MiddleTerm_inv.transpose());
     mu = Multiply(mu, X_Train.transpose());
