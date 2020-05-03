@@ -124,8 +124,7 @@ int main(int argc, char *argv[])
     model Model(X_Train, Y_Train, X_Test, alpha, beta1, beta2);
     Model.Train();
     Model.PredictMean();
-    to_csv(Model.get_mu(), mean);
-    to_csv(Model.get_Sigma_2(), variance); 
+    to_csv(Model.get_mu(), mean); 
     std::cout << "The mean is" << std::endl;
     for(int row = 0; row != Model.get_mu().rows(); row ++)
     {
@@ -135,9 +134,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    std::cout << "The variance is" << std::endl;
-
     Model.PredictVariance();
+    to_csv(Model.get_Sigma_2(), variance);
+    std::cout << "The variance is" << std::endl;
     for(int row = 0; row != Model.get_Sigma_2().rows(); row++)
     {
         for(int col = 0; col != Model.get_Sigma_2().cols(); col ++)
