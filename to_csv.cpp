@@ -18,7 +18,7 @@ void to_csv(Eigen::MatrixXf Matrix, std::string file_name)
             }
             else
             {
-                csv_file << std::to_string(Matrix(row,col)) + "/n";
+                csv_file << std::to_string(Matrix(row,col)) << std::endl;
             }
             
         }
