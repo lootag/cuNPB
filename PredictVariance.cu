@@ -9,7 +9,7 @@ void model::PredictVariance()
 {
     Eigen::MatrixXf X_Train = model::get_X_Train();
     Eigen::MatrixXf Y_Train = model::get_Y_Train();
-    Eigen::MatrixXf X_Test = model::get_Y_Test();
+    Eigen::MatrixXf X_Test = model::get_X_Test();
     float sigma = model::get_sigma();
     float l = model::get_l();
     
