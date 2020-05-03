@@ -3,7 +3,7 @@
 #include <math.h>
 #include "model.h"
 #include "preprocessing.h"
-#include "enumerators.g"
+#include "enumerators.h"
 
 void model::PredictVariance()
 {
