@@ -20,7 +20,7 @@ void model::PredictMean()
     Eigen::MatrixXf MiddleTerm = K_Train_Train + (pow(sigma, 2) * I); 
     Eigen::MatrixXf MiddleTerm_inv = MiddleTerm.inverse();
     Eigen::MatrixXf mu = Multiply(K_Test_Train, MiddleTerm_inv.transpose());
-    mu = Multiply(mu, Y_Train.transpose());
+    mu = Multiply(mu, Y_Train.transpose());       
     model::set_mu(mu);
 
 }

@@ -106,6 +106,7 @@ int main()
     model Model(A, B, A, alpha, beta1, beta2);
     Model.Train();
     Model.PredictMean(); 
+    std::cout << "The mean is" << std::endl;
     for(int row = 0; row != Model.get_mu().rows(); row ++)
     {
         for(int col = 0; col != Model.get_mu().cols(); col++)
@@ -113,6 +114,18 @@ int main()
             std::cout << std::to_string(Model.get_mu()(row, col)) << std::endl; 
         }
     }
+
+    std::cout << "The variance is" << std::endl;
+
+    Model.PredictVariance();
+    for(int row = 0; row != Model.get_Sigma_2().rows(); row++)
+    {
+        for(int col = 0; col != Model.get_Sigma_2().cols(); col ++)
+        {
+            std::cout << std::to_string(Model.get_Sigma_2()(row,col)) << std::endl;
+        }
+    }
+
 
     return 0;
 }
