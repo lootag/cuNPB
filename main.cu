@@ -7,13 +7,27 @@
 #include <unistd.h>
 #include <eigen3/Eigen/Dense>
 
-int main()
+int main(int argc, char *argv[])
 {
-    char *directory = "/content/src"; 
+    if(argc < 8)
+    {
+        std::cout << "You're missing some arguments. Please read the docs, then try again." << std::endl;
+    }
+    
+    std::string train = argv[1];
+    std::string test = argv[4];
+    std::string labels = argv[6];
+    int train_rows = std::stoi(argv[2]);
+    int train_cols = std::stoi(argv[3]);
+    int test_rows = std::stoi(argv[5]);
+    int labels_cols = std::stoi(argv[7]);
+    char *directory = "/content/data"; 
     int ret;
     ret = chdir(directory);
-    //Eigen::MatrixXf Left = from_csv("train.csv", 4, 3);
-    //Eigen::MatrixXf Right = from_csv("test.csv", 3, 2);
+    Eigen::MatrixXf X_Train = from_csv(train, train_rows, train_cols);
+    Eigen::MatrixXf X_Test = from_csv(test, test_rows, train_cols);
+    Eigen::MatrixXf Y_Train = from_csv(labels, train_rows, labels_cols);
+
     
     /*
     Eigen::MatrixXf Result = Multiply(Left, Right.transpose());
@@ -103,7 +117,7 @@ int main()
         std::cout << parameters[index] << std::endl; 
     }
     */
-    model Model(A, B, A, alpha, beta1, beta2);
+    model Model(X_Train, Y_Train, X_Test, alpha, beta1, beta2);
     Model.Train();
     Model.PredictMean(); 
     std::cout << "The mean is" << std::endl;
