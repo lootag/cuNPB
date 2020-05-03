@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
     {
         for(int col = 0; col != X_Test.cols(); col++)
         {
-            std::cout << std::to_string(X_Train(row,col))) << std::endl;
+            std::cout << std::to_string(X_Train(row,col)) << std::endl;
         }
     }
 
@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
     {
         for(int col = 0; col != X_Test.cols(); col++)
         {
-            std::cout << std::to_string(X_Test(row,col))) << std::endl;
+            std::cout << std::to_string(X_Test(row,col)) << std::endl;
         }
     }
 
@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
     {
         for(int col = 0; col != Y_Train.cols(); col++)
         {
-            std::cout << std::to_string(Y_Train(row,col))) << std::endl;
+            std::cout << std::to_string(Y_Train(row,col)) << std::endl;
         }
     }
 
